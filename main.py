@@ -22,40 +22,50 @@ page_header = """
 <head>
     <title>User Signup</title>
 </head>
+    <h1>User Signup</h1>
 <body>
-
 """
-
-class SignupPage(webapp2.RequestHandler):
-
-    def get(self):
-        header = "<h1>User Signup</h1>"
-
-        username = """
-        <form action="/usrnm" method = "post">
-            <label>
-                Username
-            <input type = "text" name = "user-name"/>
-            </label>
-        </form>
-        """
-        page = header + username
-        return page
-
-
-
 
 page_footer = """
 </body>
 </html>
 """
 
+# form for adding the username,pw,pwverification,email.
+user_info = """
+    <form action="/" method="post">
+        <label>Username
+            <input type="text" name="username"/>
+        </label>
+        <br>
+        <label>Password
+            <input type="password" name="password"/>
+        </label>
+        <br>
+        <label>Verify Password
+            <input type="password" name="verify password"/>
+        </label>
+        <br>
+        <label> Email(optional)
+            <input type="text" name="Email"/>
+        </label>
 
-class MainHandler(webapp2.RequestHandler):
+    <br>
+    <br>
+    <input type = "submit"/>
+    </form>
+    """
+
+
+class Index(webapp2.RequestHandler):
     def get(self):
-        self.response.write(page_header)
+        self.response.out.write(page_header + user_info)
+
+
+    def post(self):
+        self.response.write('Thanks for filling out the information.')
+
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler),
-    ('/usrnm',SignupPage)
+    ('/', Index)
 ], debug=True)
