@@ -59,7 +59,8 @@ user_info = """
 
 class Index(webapp2.RequestHandler):
     def get(self):
-        self.response.out.write(page_header + user_info)
+        self.response.out.write(page_header + user_info + page_footer)
+
 
 
     def post(self):
