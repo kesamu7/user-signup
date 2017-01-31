@@ -38,21 +38,26 @@ user_info = """
             <input type="text" name="username"/>
         </label>
         <br>
+
         <label>Password
             <input type="password" name="password"/>
         </label>
         <br>
+
         <label>Verify Password
             <input type="password" name="verify password"/>
         </label>
         <br>
+
         <label> Email(optional)
             <input type="text" name="Email"/>
         </label>
 
+
+
     <br>
     <br>
-    <input type = "submit"/>
+    <input type = "submit" value="Sign Up" />
     </form>
     """
 
@@ -61,12 +66,11 @@ class Index(webapp2.RequestHandler):
     def get(self):
         self.response.out.write(page_header + user_info + page_footer)
 
-
-
     def post(self):
-        self.response.write('Thanks for filling out the information.')
+        self.response.out.write("Welcome, %s%s" %(self.request.get("username"),'!'))
 
 
-app = webapp2.WSGIApplication([
-    ('/', Index)
-], debug=True)
+
+
+
+app = webapp2.WSGIApplication([('/', Index)], debug=True)
