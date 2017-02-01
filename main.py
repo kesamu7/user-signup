@@ -31,53 +31,38 @@ page_footer = """
 </html>
 """
 
-# form for adding the username,pw,pwverification,email.
-user_info = """
-    <form action="/" method="post">
-        <label>Username
-            <input type="text" name="username"/>
-        </label>
-        <br>
 
-        <label>Password
-            <input type="password" name="password"/>
-        </label>
-        <br>
-
-        <label>Verify Password
-            <input type="password" name="verify password"/>
-        </label>
-        <br>
-
-        <label> Email(optional)
-            <input type="text" name="Email"/>
-        </label>
-
-
-
-    <br>
-    <br>
-    <input type = "submit" value="Sign Up" />
-    </form>
-    """
 
 
 class Index(webapp2.RequestHandler):
+
     def get(self):
-        self.response.out.write(page_header + user_info + page_footer)
+        user_name = """
+        <form action="/" method="post">
+          <label>Username
+              <input type="text" name="username"/>
+          </label>
+          <br>
+          <br>
+        <input type = "submit" value="Sign Up" />
+        </form>
+        """
+        self.response.write(page_header + user_name + page_footer)
 
     def post(self):
-
-        self.redirect('/welcome')
+        username = self.request.get('username')
+        self.redirect('/welcome?username={}'.format(username))
 
 class Welcome(webapp2.RequestHandler):
+
     def get(self):
 
-        self.response.out.write("Welcome, %s%s" % (self.request.get('username'), '!'))
+        the_username = self.request.get("username")
+        self.response.write("Welcome, {}{}".format(self.request.get('username'), '!'))
 
 
 
 app = webapp2.WSGIApplication([
     ('/', Index),
-    ('/welcome',Welcome)
+    ('/welcome', Welcome)
 ],debug=True)
