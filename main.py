@@ -67,10 +67,17 @@ class Index(webapp2.RequestHandler):
         self.response.out.write(page_header + user_info + page_footer)
 
     def post(self):
-        self.response.out.write("Welcome, %s%s" %(self.request.get("username"),'!'))
+
+        self.redirect('/welcome')
+
+class Welcome(webapp2.RequestHandler):
+    def get(self):
+
+        self.response.out.write("Welcome, %s%s" % (self.request.get('username'), '!'))
 
 
 
-
-
-app = webapp2.WSGIApplication([('/', Index)], debug=True)
+app = webapp2.WSGIApplication([
+    ('/', Index),
+    ('/welcome',Welcome)
+],debug=True)
