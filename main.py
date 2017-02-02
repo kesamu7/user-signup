@@ -42,23 +42,22 @@ class Index(webapp2.RequestHandler):
           <label>Username
               <input type="text" name="username"/>
           </label>
-          <br>
-          <br>
-        <input type = "submit" value="Sign Up" />
         </form>
         """
+
         self.response.write(page_header + user_name + page_footer)
+
 
     def post(self):
         username = self.request.get('username')
         self.redirect('/welcome?username={}'.format(username))
 
 class Welcome(webapp2.RequestHandler):
-
     def get(self):
+        the_user = self.request.get("username")
+        self.response.write("Welcome, " + the_user + "!")
 
-        the_username = self.request.get("username")
-        self.response.write("Welcome, {}{}".format(self.request.get('username'), '!'))
+
 
 
 
