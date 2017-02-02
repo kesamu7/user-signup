@@ -42,6 +42,19 @@ class Index(webapp2.RequestHandler):
           <label>Username
               <input type="text" name="username"/>
           </label>
+          <br>
+          <label>Password
+            <input type = "password" name="password"/>
+          </label>
+          <br>
+          <label>Verify Password
+            <input type = "password" name="verify-password"/>
+          </label>
+          <br>
+          <label>Email(optional)
+            <input type = "text" name="email"/>
+          </label>
+          <input type="submit" value="Sign Up"/>
         </form>
         """
 
